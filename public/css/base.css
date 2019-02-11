@@ -9,6 +9,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans KR', sans-serif;
+    /* line-height: 2.25rem; */
+}
+
+html {
+    line-height: 1.5em;
 }
 
 p,
@@ -26,3 +31,34 @@ li {
     clear: both;
 }
 
+@media screen and (max-width:1024px) {
+
+    html,
+    body {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:768) {
+
+    html,
+    body {
+        font-size: 16;
+    }
+}
+
+@media screen and (max-width:480) {
+
+    html,
+    body {
+        font-size: 18;
+    }
+}
+
+@media screen and (max-width:320) {
+
+    html,
+    body {
+        font-size: 20;
+    }
+}

@@ -27,3 +27,30 @@ $.ajax({
         $("#city").html(html);
     }
 });
+
+// click했을 때 하이라이트 해주기
+$(".nav").click(function () {
+    var n = $(this).index();
+    $(".nav").css({
+        "background-color": "#666",
+        "color": "#222",
+        "border-top": "5px solid #444",
+        "border-right": "5px solid #444",
+        "border-left": "5px solid #444  "
+    });
+
+    $(this).css({
+        "background-color": "orange",
+        "color": "#fff",
+        "border-top": "5px solid #ff9100",
+        "border-right": "5px solid #ff9100",
+        "border-left": "5px solid #ff9100"
+    });
+
+    $(".cont").hide(); // 즉시 실행, 시간을 넣으면 animation이 생긴다.
+    $(".cont").eq(n).show(); // show() 안에 있는 숫자는 시간을 의미.
+
+});
+
+// default 설정하기
+$(".nav").eq(0).trigger("click"); // 우리가 클릭하지 않아도, 여기를 만나면 click이 먹는 것.
