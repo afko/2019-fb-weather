@@ -17,20 +17,25 @@ var option = {
 };
 
 // modal init
-$.ajax({
-    type: "get",
-    url: "../json/city.json",
-    dataType: "json",
-    success: function (data) {
-        var html = '<option value = "">도시를 선택하세요.</option>';
-        // console.log(data.cities[0].name);
-        for (var i in data.cities) {
-            html += '<option value= "' + data.cities[i].id + '">';
-            html += data.cities[i].name + ' [' + data.cities[i].id + ']</option>';
+cityInit();
+function cityInit() {
+    $("#modal").show();
+    $.ajax({
+        type: "get",
+        url: "../json/city.json",
+        dataType: "json",
+        success: function (data) {
+            var html = '<option value = "">도시를 선택하세요.</option>';
+            // console.log(data.cities[0].name);
+            for (var i in data.cities) {
+                html += '<option value= "' + data.cities[i].id + '">';
+                html += data.cities[i].name + ' [' + data.cities[i].id + ']</option>';
+            }
+            $("#city").html(html);
         }
-        $("#city").html(html);
-    }
-});
+    });
+}
+
 
 // click했을 때 하이라이트 해주기
 $(".nav").click(function () {
@@ -77,6 +82,21 @@ $("#city").change(function () {
     });
 });
 
-function dailyInit(data){
+function dailyInit(data) {
     console.log(data);
-};
+    $("#modal").hide();
+    var $daily = $("#daily"); // jQuery 객체를 다룰 때는 $를 활용해서 변수를 선언한다.
+    var src = "../img/icon/" + data.weather[0].icon + ".png";
+    var temp = data.main.temp + "℃";
+    var temp2 = data.main.temp_max + "℃ / " + data.main.temp_min + "℃";
+    var html = '';
+    html += '<ul>';
+    html += '<li class="icon"><img src="' + src + '" class = "img"></li>';
+    html += '<li class="city_name">' + $("#city > option:selected").text() + '</li>';
+    html += '<li><button class="w3-button w3-indigo" onclick="cityInit();">도시선택</button></li>'; // onclick하면 cityInit이 실행되겠습니다.
+    html += '<li class="temp">현재평균온도: ' + temp + '</li>';
+    html += '<li class="temp2">최고/최저 온도: ' + temp2 + '</li>';
+    html += '</ul>';
+
+    $daily.html(html);
+}

@@ -31,6 +31,11 @@ li {
     clear: both;
 }
 
+/* 껍데기에 꽉차게 그래서 base에 만들어 놓는 것이 편하다. */
+.img {
+    width: 100%;
+}
+
 @media screen and (max-width:1024px) {
 
     html,

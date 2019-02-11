@@ -58,3 +58,32 @@ li.nav:first-child {
 #city {
     font-size: 1.4rem;
 }
+
+#daily {
+    font-size: 1.5rem;
+}
+
+#daily>ul {
+    margin-top: 10%;
+}
+
+#daily li {
+    width: 90%;
+    margin: auto;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+#daily .icon {
+    /* width를 50% 줬는데 암만 커봤자 300px까지만 커져라 */
+    max-width: 300px;
+    width: 50%;
+    /* padding: 10%; */
+    margin: 2rem auto;
+}
+
+#daily .city_name {
+    text-align: center;
+    font-size: 1.5em;
+    color: #03c;
+}
