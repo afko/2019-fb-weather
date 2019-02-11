@@ -11,6 +11,10 @@ var apiURL = "https://api.openweathermap.org/data/2.5/";
 var appid = "e1a342dc3fe3e3603e1ad544f3cdb8dd";
 var units = "metric";
 var files = ["weather", "forecast"];
+var option = {
+    appid: appid, // option의 변수 appid에다가 전역변수 appid를 참조시켰다.
+    units: units
+};
 
 // modal init
 $.ajax({
@@ -36,7 +40,8 @@ $(".nav").click(function () {
         "color": "#222",
         "border-top": "5px solid #444",
         "border-right": "5px solid #444",
-        "border-left": "5px solid #444  "
+        "border-left": "5px solid #444  ",
+        "z-index": 10
     });
 
     $(this).css({
@@ -44,7 +49,8 @@ $(".nav").click(function () {
         "color": "#fff",
         "border-top": "5px solid #ff9100",
         "border-right": "5px solid #ff9100",
-        "border-left": "5px solid #ff9100"
+        "border-left": "5px solid #ff9100",
+        "z-index": 100
     });
 
     $(".cont").hide(); // 즉시 실행, 시간을 넣으면 animation이 생긴다.
@@ -54,3 +60,23 @@ $(".nav").click(function () {
 
 // default 설정하기
 $(".nav").eq(0).trigger("click"); // 우리가 클릭하지 않아도, 여기를 만나면 click이 먹는 것.
+
+
+// 값이 change가 되면!
+$("#city").change(function () {
+    // var v = $(this).val();
+    option.id = $(this).val();
+
+
+    $.ajax({
+        type: "get",
+        url: apiURL + files[0],
+        data: option,
+        dataType: "json",
+        success: dailyInit
+    });
+});
+
+function dailyInit(data){
+    console.log(data);
+};
