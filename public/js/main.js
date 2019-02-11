@@ -72,6 +72,7 @@ $(".nav").eq(0).trigger("click"); // 우리가 클릭하지 않아도, 여기를
 $("#city").change(function () {
     // var v = $(this).val();
     option.id = $(this).val();
+    // console.log(option.id);
     var sendData = {
         type: "get",
         dataType: "json",
@@ -79,6 +80,7 @@ $("#city").change(function () {
     };
     sendData.url = apiURL + files[0];
     sendData.success = dailyInit;
+    $.ajax(sendData);
     $.ajax(sendData);
 
     sendData.url = apiURL + files[1];
@@ -110,6 +112,7 @@ function dailyInit(data) {
     var src = "../img/icon/" + data.weather[0].icon + ".png";
     var temp = data.main.temp + "℃";
     var temp2 = data.main.temp_max + "℃ / " + data.main.temp_min + "℃";
+    var humi = data.main.humidity + "%"
     var html = '';
     html += '<ul>';
     html += '<li class="icon"><img src="' + src + '" class = "img"></li>';
@@ -117,6 +120,7 @@ function dailyInit(data) {
     html += '<li><button class="w3-button w3-indigo" onclick="cityInit();">도시선택</button></li>'; // onclick하면 cityInit이 실행되겠습니다.
     html += '<li class="temp">현재평균온도: <b class="w3-text-indigo">' + temp + '</b></li>';
     html += '<li class="temp2">최고/최저 온도: <b class="w3-text-indigo">' + temp2 + '</b></li>';
+    html += '<li class="humi">습도: <b class="w3-text-indigo">' + humi + '</b></li>';
     html += '</ul>';
 
     $daily.html(html);
@@ -124,4 +128,32 @@ function dailyInit(data) {
 
 function weeklyInit(data) {
     console.log(data);
+    $("#modal").hide();
+    var $weekly = $("#weekly"); // jQuery 객체를 다룰 때는 $를 활용해서 변수를 선언한다.
+    var src, temp, temp2, date;
+    // var humi = data.main.humidity + "%"
+
+
+    var html = '<div>';
+
+    for (var i in data.list) {
+
+        
+        src = "../img/icon/" + data.list[i].weather["0"].icon + ".png";
+        date = data.list[i].dt_txt;
+        temp = data.list[i].main.temp + "℃";
+        temp2 = data.list[i].main.temp_max + "℃ / " + data.list[i].main.temp_min + "℃";
+        html += '<ul class="clear">';
+        html += '<li class="icon"><img src="' + src + '" class="img"></li>';
+        html += '<li class="content">';
+        html += '<div>예보날짜: ' + date + '</div>';
+        html += '<div>현재온도: ' + temp + '</div>';
+        html += '<div>최고/최저온도: ' + temp2 + '</div>';
+        html += '</li>';
+        html += '</ul>';
+
+    }
+
+    html += '</div>';
+    $weekly.html(html);
 };

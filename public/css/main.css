@@ -90,6 +90,25 @@ li.nav:first-child {
     color: #03c;
 }
 
+#weekly {
+    font-size: 1.25rem;
+}
+
+#weekly > div > ul {
+    border-bottom: 2px solid #666;
+    padding: 5%;
+}
+
+#weekly .icon {
+    width: 20%;
+    float: left;
+}
+
+#weekly .content {
+    width: 70%;
+    float: right;
+}
+
 /* print하지 않고, screen에서만 처리하겠다 */
 /* @media screen and (max-width:1024px) {
     #daily li {
