@@ -18,6 +18,7 @@ var option = {
 
 // modal init
 cityInit();
+
 function cityInit() {
     $("#modal").show();
     $.ajax({
@@ -71,19 +72,39 @@ $(".nav").eq(0).trigger("click"); // 우리가 클릭하지 않아도, 여기를
 $("#city").change(function () {
     // var v = $(this).val();
     option.id = $(this).val();
-
-
-    $.ajax({
+    var sendData = {
         type: "get",
-        url: apiURL + files[0],
-        data: option,
         dataType: "json",
-        success: dailyInit
-    });
+        data: option,
+    };
+    sendData.url = apiURL + files[0];
+    sendData.success = dailyInit;
+    $.ajax(sendData);
+
+    sendData.url = apiURL + files[1];
+    sendData.success = weeklyInit;
+    $.ajax(sendData);
+
+    // $.ajax({
+    //     type: "get",
+    //     url: apiURL + files[0],
+    //     data: option,
+    //     dataType: "json",
+    //     success: dailyInit
+    // });
+    // 
+
+    // $.ajax({
+    //     type: "get",
+    //     url: apiURL + files[1],
+    //     data: option,
+    //     dataType: "json",
+    //     success: weeklyInit
+    // });
 });
 
 function dailyInit(data) {
-    console.log(data);
+    // console.log(data);
     $("#modal").hide();
     var $daily = $("#daily"); // jQuery 객체를 다룰 때는 $를 활용해서 변수를 선언한다.
     var src = "../img/icon/" + data.weather[0].icon + ".png";
@@ -94,9 +115,13 @@ function dailyInit(data) {
     html += '<li class="icon"><img src="' + src + '" class = "img"></li>';
     html += '<li class="city_name">' + $("#city > option:selected").text() + '</li>';
     html += '<li><button class="w3-button w3-indigo" onclick="cityInit();">도시선택</button></li>'; // onclick하면 cityInit이 실행되겠습니다.
-    html += '<li class="temp">현재평균온도: ' + temp + '</li>';
-    html += '<li class="temp2">최고/최저 온도: ' + temp2 + '</li>';
+    html += '<li class="temp">현재평균온도: <b class="w3-text-indigo">' + temp + '</b></li>';
+    html += '<li class="temp2">최고/최저 온도: <b class="w3-text-indigo">' + temp2 + '</b></li>';
     html += '</ul>';
 
     $daily.html(html);
 }
+
+function weeklyInit(data) {
+    console.log(data);
+};

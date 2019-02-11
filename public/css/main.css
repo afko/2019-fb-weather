@@ -49,6 +49,7 @@ li.nav {
     margin-top: -5px;
     position: relative;
     z-index: 50;
+    overflow-y: auto;
 }
 
 li.nav:first-child {
@@ -63,12 +64,13 @@ li.nav:first-child {
     font-size: 1.5rem;
 }
 
+
 #daily>ul {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 #daily li {
-    width: 90%;
+    width: 50%;
     margin: auto;
     padding: 0.5rem;
     text-align: center;
@@ -76,7 +78,7 @@ li.nav:first-child {
 
 #daily .icon {
     /* width를 50% 줬는데 암만 커봤자 300px까지만 커져라 */
-    max-width: 300px;
+    max-width: 200px;
     width: 50%;
     /* padding: 10%; */
     margin: 2rem auto;
@@ -87,3 +89,28 @@ li.nav:first-child {
     font-size: 1.5em;
     color: #03c;
 }
+
+/* print하지 않고, screen에서만 처리하겠다 */
+/* @media screen and (max-width:1024px) {
+    #daily li {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    #daily li {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:480px) {
+    #daily li {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:320px) {
+    #daily li {
+        width: 90%;
+    }
+} */
